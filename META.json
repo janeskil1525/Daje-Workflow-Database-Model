@@ -1,5 +1,5 @@
 {
-   "abstract" : "It's new $module",
+   "abstract" : "is the data models used by Daje-Workflow",
    "author" : [
       "janeskil1525 <janeskil1525@gmail.com>"
    ],
@@ -52,7 +52,18 @@
       }
    },
    "release_status" : "unstable",
-   "version" : "0.01",
+   "resources" : {
+      "bugtracker" : {
+         "web" : "https://github.com/janeskil1525/Daje-Workflow-Database-Model/issues"
+      },
+      "homepage" : "https://github.com/janeskil1525/Daje-Workflow-Database-Model",
+      "repository" : {
+         "type" : "git",
+         "url" : "https://github.com/janeskil1525/Daje-Workflow-Database-Model.git",
+         "web" : "https://github.com/janeskil1525/Daje-Workflow-Database-Model"
+      }
+   },
+   "version" : "0.03",
    "x_serialization_backend" : "JSON::PP version 4.16",
    "x_static_install" : 1
 }

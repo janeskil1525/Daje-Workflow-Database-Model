@@ -1,6 +1,7 @@
 package Daje::Workflow::Database::Model::Context;
 use Mojo::Base -base, -signatures;
 
+use Mojo::JSON qw { to_json from_json };
 # NAME
 # ====
 #
@@ -40,7 +41,7 @@ use Mojo::Base -base, -signatures;
 has 'db';
 has 'context_pkey';
 has 'workflow_pkey';
-
+has 'context_pkey';
 
 sub load_pk($self) {
     my $context = $self->_load_pk();
@@ -63,10 +64,12 @@ sub _load_pk($self) {
         }
     );
 
-    my $hash;
-    $hash = $data->hash if $data->rows > 0;
-
-    return $hash;
+    my $context;
+    $context = $data->hash if $data->rows > 0;
+    if (defined $context->{context}) {
+        $context->{context} = from_json $context->{context};
+    }
+    return $context;
 }
 
 sub load_fk($self) {
@@ -90,14 +93,19 @@ sub _load_fk($self) {
         }
     );
 
-    my $hash;
-    $hash = $data->hash if $data->rows > 0;
-
-    return $hash;
+    my $context;
+    $context = $data->hash if $data->rows > 0;
+    if (defined $context->{context}) {
+        $context->{context} = from_json $context->{context};
+    }
+    return $context;
 }
 
 sub save($self, $context) {
 
+    if (defined $context->{context}) {
+        $context->{context} = to_json $context->{context};
+    }
     if ($context->{context_pkey} > 0) {
         $self->db->update(
             'context',
@@ -109,7 +117,7 @@ sub save($self, $context) {
             }
         )
     } else {
-        delete %$context{contextr_pkey};
+        delete %$context{context_pkey};
         $context->{context_pkey} = $self->db->insert(
             'context',
             {
@@ -125,6 +133,12 @@ sub save($self, $context) {
 }
 
 1;
+
+
+
+
+
+
 
 
 
