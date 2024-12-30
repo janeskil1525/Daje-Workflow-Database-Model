@@ -39,7 +39,6 @@ use Mojo::JSON qw { to_json from_json };
 
 
 has 'db';
-has 'context_pkey';
 has 'workflow_pkey';
 has 'context_pkey';
 
@@ -133,6 +132,7 @@ sub save($self, $context) {
 }
 
 1;
+
 
 
 
