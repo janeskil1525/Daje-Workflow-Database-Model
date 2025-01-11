@@ -2,5 +2,6 @@ Revision history for Perl extension Daje-Workflow-Database-Model
 
 {{$NEXT}}
 
+    - 2025-01-10 Bugfix of context
     - spelling mistake corrected
 
