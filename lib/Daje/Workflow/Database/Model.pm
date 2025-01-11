@@ -25,13 +25,11 @@ use Daje::Workflow::Database::Model::Context;
 #
 #     my $context = $self->context();
 #
+#     $data->insert_history("History");
+#
 #
 # REQUIRES
 # ========
-#
-# Daje::Workflow::Database::Model::Context
-#
-# Daje::Workflow::Database::Model::Workflow
 #
 # Mojo::Base
 #
@@ -49,6 +47,7 @@ use Daje::Workflow::Database::Model::Context;
 #
 #  save_workflow($self, $workflow)
 #
+#  insert_history($self, $history_text)
 #
 # LICENSE
 # =======
@@ -64,7 +63,7 @@ use Daje::Workflow::Database::Model::Context;
 # janeskil1525 E<lt>janeskil1525@gmail.comE<gt>
 #
 
-our $VERSION = "0.11";
+our $VERSION = "0.12";
 
 has 'db';               # Constructor
 has 'workflow_pkey';    # Constructor
@@ -125,7 +124,12 @@ sub save_context($self, $context) {
     return ;
 }
 
-sub insert_history($self, $history) {
+sub insert_history($self, $history_text) {
+    return unless defined $history_text and length($history_text) > 0;
+
+    my $history->{workflow_fkey} = $self->workflow_pkey();
+    $history->{history} = $history_text;
+
     Daje::Workflow::Database::Model::History->new(
         db => $self->db
     )->insert(
