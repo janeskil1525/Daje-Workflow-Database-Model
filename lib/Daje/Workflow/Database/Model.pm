@@ -3,6 +3,7 @@ use Mojo::Base -base, -signatures;
 
 use Daje::Workflow::Database::Model::Workflow;
 use Daje::Workflow::Database::Model::Context;
+use Daje::Workflow::Database::Model::History;
 
 # NAME
 # ====
@@ -63,7 +64,7 @@ use Daje::Workflow::Database::Model::Context;
 # janeskil1525 E<lt>janeskil1525@gmail.comE<gt>
 #
 
-our $VERSION = "0.12";
+our $VERSION = "0.13";
 
 has 'db';               # Constructor
 has 'workflow_pkey';    # Constructor
