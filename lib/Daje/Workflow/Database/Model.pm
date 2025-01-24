@@ -67,7 +67,7 @@ use Daje::Workflow::Database::Model::History;
 # janeskil1525 E<lt>janeskil1525@gmail.comE<gt>
 #
 
-our $VERSION = "0.14";
+our $VERSION = "0.15";
 
 has 'db';               # Constructor
 has 'workflow_pkey';    # Constructor
@@ -113,6 +113,12 @@ sub load_context($self) {
         context       => $self->context,
     )->load_fk();
 
+    my $new_context = $self->context();
+    if(exists $new_context->{context}) {
+        foreach my $key(keys %{$new_context->{context}}) {
+            $context->{context}->{$key} = $new_context->{context}->{$key};
+        }
+    }
     $self->context($context);
     return;
 }
